@@ -80,6 +80,22 @@ namespace QueryInterceptor
             return Execute<object>(expression);
         }
 
+#if DNXCORE50
+        public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
+        {
+            Check.NotNull(expression, "expression");
+
+            var provider = Source.Provider as IDbAsyncQueryProvider;
+            if (provider != null)
+            {
+                var translated = VisitAll(expression);
+                return provider.ExecuteAsync<TResult>(translated);
+            }
+
+            // In case Source.Provider is not a IDbAsyncQueryProvider, just execute normal
+            return (IAsyncEnumerable<TResult>) Execute<TResult>(expression);
+        }
+#else
         /// <summary>
         /// Asynchronously executes the query represented by a specified expression tree.
         /// </summary>
@@ -93,6 +109,7 @@ namespace QueryInterceptor
         {
             return ExecuteAsync<TResult>(expression, CancellationToken.None);
         }
+#endif
 
         /// <summary>
         /// Asynchronously executes the query represented by a specified expression tree.

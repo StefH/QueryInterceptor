@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using QueryInterceptor;
 using Xunit;
+
+#if DNXCORE50
+using Microsoft.Data.Entity;
+#else
+using System.Data.Entity;
+#endif
 
 namespace QueryInterceptorAsyncUnitTests
 {
@@ -61,7 +66,8 @@ namespace QueryInterceptorAsyncUnitTests
 
             var visitor = new EqualsToNotEqualsVisitor();
             var queryOdd = queryEven.InterceptWith(visitor);
-
+            //tween the following methods or properties: 'System.Data.Entity.QueryableExtensions.FirstAsync<TSource>(System.Linq.IQueryable<TSource>,
+            //System.Linq.Expressions.Expression<System.Func<TSource, bool>>, System.Threading.CancellationToken)' and 'System.Linq.QueryableExtensions.
             var task = queryOdd.FirstAsync(n => n > 5, CancellationToken.None);
             task.ContinueWith(t => t.Result).Wait();
 
