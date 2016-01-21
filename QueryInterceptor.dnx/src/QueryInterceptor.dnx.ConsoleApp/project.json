@@ -9,6 +9,7 @@
     },
     "frameworks": {
         "dnx451": { },
+        "dnx452": { },
         "dnxcore50": {
             "dependencies": {
                 "System.Console": "4.0.0-beta-*"
