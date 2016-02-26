@@ -13,3 +13,5 @@ _ReSharper.*
 *[Rr]e[Ss]harper.user
 _ReSharper.*/
 packages/*
+QueryInterceptor.dnx/src/QueryInterceptor.dnx/project.lock.json
+QueryInterceptor.dnx/test/QueryInterceptor.dnx.UnitTests/project.lock.json
