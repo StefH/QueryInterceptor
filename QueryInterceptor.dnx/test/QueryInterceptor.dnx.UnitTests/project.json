@@ -1,6 +1,7 @@
 ﻿{
     "version": "1.0.0-*",
     "authors": [ "Stef Heyenrath" ],
+
     "dependencies": {
         "QueryInterceptor.dnx": "1.0.0-*",
 
@@ -15,19 +16,12 @@
     },
 
     "frameworks": {
-        "dnx451": {
-            "dependencies": {
-                "EntityFramework": "6.1.3"
-            }
-        },
-        "dnx452": {
-            "dependencies": {
-                "EntityFramework": "6.1.3"
-            }
-        },
+
         "dnxcore50": {
             "dependencies": {
-                "System.Runtime": "4.0.21-beta-*"
+                "System.Runtime": "4.0.21-beta-*",
+
+                "System.Linq.Queryable": "4.0.1-beta-*"
             }
         }
     }
